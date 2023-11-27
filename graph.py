@@ -20,3 +20,32 @@ def get_new_test_graph():
         data['feature2'] = np.random.randint(0, high=100)
     
     return test_graph
+
+test_graph = get_new_test_graph()
+nx.draw(test_graph)
+
+import gravis as gv 
+
+gv.d3(
+    test_graph, 
+     
+    # graph specs
+    graph_height=500,
+    
+    # node specs
+    node_size_data_source="betweenness_centrality",
+    use_node_size_normalization=True,
+    node_size_normalization_min=15,
+    node_size_normalization_max=35,
+    show_node_label=True,
+    node_label_data_source='node_identifier',
+    
+    # edge specs
+    edge_size_data_source='feature1',
+    use_edge_size_normalization=True,
+    edge_size_normalization_min=1,
+    edge_size_normalization_max=5,
+
+    # force-directed graph specs
+    many_body_force_strength=-500
+)
